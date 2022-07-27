@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const Login = () => {
+  const [btnDisabled, setBtnDisabled] = useState(true);
+  const emailRegex = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/;
+  const pwdRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
   const [inputs, setInputs] = useState({
     name: "",
     password: "",
@@ -14,8 +18,13 @@ const Login = () => {
       ...inputs,
       [name]: value,
     });
+    checkReg();
   };
 
+  const checkReg = () => {
+    if (pwdRegex.test(password) && emailRegex.test(email))
+      setBtnDisabled(false);
+  };
   const onSubmit = (e) => {
     axios
       .post("http://localhost:8080/users/login", {
@@ -27,7 +36,7 @@ const Login = () => {
         localStorage.setItem("token", res.data.token);
       })
       .catch((err) => {
-        alert("다시 한번 입력해주세요.");
+        alert(err.details);
       });
     e.preventDefault();
   };
@@ -53,10 +62,10 @@ const Login = () => {
           onChange={onChange}
           placeholder="password를 입력해주세요."
         />
-        <button type="submit">로그인</button>
+        <button type="submit" disabled={btnDisabled}>
+          로그인
+        </button>
       </form>
-      이메일:
-      {email} 패스워드: {password}
     </>
   );
 };
