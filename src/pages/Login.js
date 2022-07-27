@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [btnDisabled, setBtnDisabled] = useState(true);
   const emailRegex = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/;
   const pwdRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
@@ -34,12 +36,22 @@ const Login = () => {
       .then((res) => {
         alert(res.data.message);
         localStorage.setItem("token", res.data.token);
+        navigate("/");
       })
       .catch((err) => {
         alert(err.details);
       });
     e.preventDefault();
   };
+  // useEffect(() => {
+  //   if (!localStorage.getItem("token")) {
+  //     alert("로그인 정보가 유효하지 않습니다. 로그인해주세요.");
+  //     navigate("/auth/login");
+  //   } else {
+  //     alert("이미 로그인 되어있습니다");
+  //     navigate("/");
+  //   }
+  // }, []);
 
   return (
     <>
