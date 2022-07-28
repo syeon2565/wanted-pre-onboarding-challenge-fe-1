@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -43,21 +44,22 @@ const Login = () => {
       });
     e.preventDefault();
   };
-  // useEffect(() => {
-  //   if (!localStorage.getItem("token")) {
-  //     alert("로그인 정보가 유효하지 않습니다. 로그인해주세요.");
-  //     navigate("/auth/login");
-  //   } else {
-  //     alert("이미 로그인 되어있습니다");
-  //     navigate("/");
-  //   }
-  // }, []);
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+    if (!token) {
+      alert("로그인 정보가 유효하지 않습니다. 로그인해주세요.");
+      navigate("/auth/login");
+    } else {
+      alert("이미 로그인 되어있습니다");
+      navigate("/");
+    }
+  }, []);
 
   return (
-    <>
+    <Wrapper>
+      <Title>로 그 인</Title>
       <form onSubmit={onSubmit}>
-        <label htmlFor="email">이메일 </label>
-        <input
+        <Input
           type="text"
           id="email"
           name="email"
@@ -65,8 +67,7 @@ const Login = () => {
           onChange={onChange}
           placeholder="eamil을 입력해주세요."
         />
-        <label htmlFor="password">비밀번호 </label>
-        <input
+        <Input
           type="password"
           id="password"
           name="password"
@@ -74,12 +75,52 @@ const Login = () => {
           onChange={onChange}
           placeholder="password를 입력해주세요."
         />
-        <button type="submit" disabled={btnDisabled}>
+        <Button type="submit" disabled={btnDisabled}>
           로그인
-        </button>
+        </Button>
       </form>
-    </>
+    </Wrapper>
   );
 };
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 638px;
+  margin: 0 auto;
+  background: #7165ff;
+  border-radius: 15px;
+  text-align: center;
+  padding: 50px 0;
+`;
 
+const Title = styled.div`
+  padding-bottom: 30px;
+  font-size: 50px;
+`;
+
+const Input = styled.input`
+  display: flex;
+  margin: 20px auto;
+  box-sizing: border-box;
+  width: 344px;
+  height: 60px;
+  background: #e1d7ff;
+  border: 2px solid #97aeff;
+  border-radius: 20px;
+  font-size: 20px;
+`;
+
+const Button = styled.button`
+  margin-top: 32px;
+  width: 190px;
+  height: 67px;
+  font-size: 30px;
+  color: black;
+  background: #c6abff;
+  border-radius: 20px;
+  cursor: pointer;
+  :disabled {
+    background: #d5ccea;
+  }
+`;
 export default Login;
