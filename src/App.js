@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import TodoTemplate from "./components/Todo/TodoTemplate";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 
@@ -16,9 +17,9 @@ function App() {
         </button>
       )}
       <Routes>
-        <Route path="/" element={<App />} />
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/signUp" element={<SignUp />} />
+        <Route path="/" element={<TodoTemplate />} />
       </Routes>
     </>
   );
