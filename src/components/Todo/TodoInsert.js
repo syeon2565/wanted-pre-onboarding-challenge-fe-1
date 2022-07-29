@@ -31,25 +31,34 @@ const TodoInsert = (token) => {
       });
   };
   return (
-    <div>
-      <InputTitle
-        name="title"
-        placeholder="할 일의 제목을 입력하세요!"
-        onChange={handleChange}
-      />
-      <br />
-      <InputContent
-        name="content"
-        cols="20"
-        rows="15"
-        placeholder="상세 내용을 입력하세요!"
-        onChange={handleChange}
-      />
+    <Wrapper>
+      <InputBox>
+        <InputTitle
+          name="title"
+          placeholder="할 일의 제목을 입력하세요!"
+          onChange={handleChange}
+        />
+        <br />
+        <InputContent
+          name="content"
+          cols="20"
+          rows="15"
+          placeholder="상세 내용을 입력하세요!"
+          onChange={handleChange}
+        />
+      </InputBox>
       <Button onClick={handleCreate}>추가하기</Button>
-    </div>
+    </Wrapper>
   );
 };
-
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 0 0 0 250px;
+`;
+const InputBox = styled.div`
+  margin: 0 auto;
+`;
 const InputTitle = styled.input`
   width: 288px;
   height: 65px;
@@ -72,13 +81,10 @@ const InputContent = styled.textarea`
 `;
 
 const Button = styled.button`
-  position: absolute;
-  left: 300px;
   width: 144px;
-  height: 209px;
+  height: 210px;
   font-size: 30px;
-  left: 430px;
-  top: 110px;
+  margin: 10px 30px 0 0;
   cursor: pointer;
   border-radius: 10px;
   background-color: rgba(255, 239, 92, 0.7);
