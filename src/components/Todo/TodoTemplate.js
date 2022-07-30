@@ -9,14 +9,16 @@ const TodoTemplate = () => {
   const token = localStorage.getItem("token");
   const [todos, setTodos] = useState([]);
   const count = todos.length;
+
   useEffect(async () => {
-    await axios
-      .get("http://localhost:8080/todos", {
-        headers: { authorization: token },
-      })
-      .then((res) => {
-        setTodos(res.data.data);
+    try {
+      const res = await axios.get("http://localhost:8080/todos", {
+        headers: {
+          Authorization: token,
+        },
       });
+      setTodos(res.data.data);
+    } catch {}
   }, []);
 
   return (
