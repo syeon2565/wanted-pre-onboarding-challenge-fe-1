@@ -1,9 +1,7 @@
-import React, { useCallback, useMemo, useState } from "react";
-import axios from "axios";
-import TodoDetail from "./TodoDetail";
+import React from "react";
 import TodoItem from "./TodoItem";
 
-const TodoList = ({ token, todos }) => {
+const TodoList = ({ todos }) => {
   return (
     <>
       {todos.map((todo) => (
