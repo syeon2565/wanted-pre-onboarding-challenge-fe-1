@@ -17,10 +17,10 @@ const TodoDetail = ({ id, token }) => {
   return (
     <Portal>
       <ModalWrapper>
-        <p>제목 : {detail.title}</p>
-        <p>내용 : {detail.content}</p>
-        <p>생성 날짜 : {detail.createdAt}</p>
-        <p>업데이트 날짜 : {detail.updatedAt}</p>
+        <div>제목 : {detail.title}</div>
+        <div>내용 : {detail.content}</div>
+        <div> 생성 날짜 : {detail.createdAt}</div>
+        <div> 업데이트 날짜 : {detail.updatedAt}</div>
       </ModalWrapper>
     </Portal>
   );
@@ -39,18 +39,24 @@ const Portal = styled.div`
 `;
 
 const ModalWrapper = styled.div`
-  display: flex;
   position: relative;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   border-radius: 10px;
-  box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
   background: #fff;
   padding: 30px 20px;
-  text-align: center;
   width: 400px;
-  height: 60%;
+  min-height: 60%;
+`;
+
+const Button = styled.button`
+  background-color: #777;
+  width: 150px;
+  height: 60px;
+  font-size: 20px;
+  color: ff0000;
+  cursor: pointer;
 `;
 
 export default TodoDetail;
