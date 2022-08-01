@@ -11,7 +11,7 @@ const TodoItem = ({ token, todo }) => {
   const [modal, setModal] = useState(false);
   const id = todo.id;
   const { title, content } = input;
-
+  const [fix, setFix] = useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInput({
@@ -19,15 +19,24 @@ const TodoItem = ({ token, todo }) => {
       [name]: value,
     });
   };
+  const handleFix = () => {
+    setFix(true);
+  };
 
-  const handleModify = () => {
-    axios.put(
-      `http://localhost:8080/todos/${id}`,
-      { title: title, contnet: content },
-      {
-        headers: { Authorization: token },
-      }
-    );
+  const handleModify = async () => {
+    try {
+      await axios.put(
+        `http://localhost:8080/todos/${id}`,
+        { title: title, content: content },
+        {
+          headers: { Authorization: token },
+        }
+      );
+      alert("내용 변경이 완료되었습니다.");
+      setFix(false);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleDelete = async () => {
@@ -48,7 +57,24 @@ const TodoItem = ({ token, todo }) => {
   return (
     <Wrapper>
       <li>{todo.title}</li>
-      <Button onClick={handleModify}>수정</Button>
+      <Button onClick={handleFix}>수정</Button>
+      {fix && (
+        <TodoFix>
+          <input
+            onChange={handleChange}
+            name="title"
+            placeholder="제목을 입력하세요"
+            value={title}
+          />
+          <textarea
+            onChange={handleChange}
+            name="content"
+            placeholder="내용을 입력하세요"
+            value={content}
+          />
+          <Button onClick={handleModify}>내용 변경</Button>
+        </TodoFix>
+      )}
       <Button onClick={handleDelete}>삭제</Button>
       <Button onClick={handleModal}>상세보기</Button>
       {modal && <TodoDetail id={id} token={token} modal={modal} />}
@@ -69,5 +95,7 @@ const Button = styled.button`
   border-radius: 10px;
   cursor: pointer;
 `;
+
+const TodoFix = styled.div``;
 
 export default TodoItem;
