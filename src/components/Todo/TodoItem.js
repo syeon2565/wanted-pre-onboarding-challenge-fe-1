@@ -96,6 +96,19 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const TodoFix = styled.div``;
+const TodoFix = styled.div`
+  display: flex;
+  margin-left: 20px;
+  input {
+    width: 200px;
+  }
+  textarea {
+    width: 200px;
+  }
+  button {
+    display: inline;
+    width: 100px;
+  }
+`;
 
 export default TodoItem;
