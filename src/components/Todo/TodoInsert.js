@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 
-const TodoInsert = (token) => {
+const TodoInsert = ({ token }) => {
   const [todos, setTodos] = useState({ title: "", content: "" });
   const { title, content } = todos;
   const handleChange = (e) => {
@@ -30,6 +30,7 @@ const TodoInsert = (token) => {
         alert("잘못된 요청입니다. 내용을 채워주세요.");
       });
   };
+
   return (
     <Wrapper>
       <InputBox>
@@ -51,6 +52,7 @@ const TodoInsert = (token) => {
     </Wrapper>
   );
 };
+
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
