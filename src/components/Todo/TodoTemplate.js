@@ -10,16 +10,20 @@ const TodoTemplate = () => {
   const [todos, setTodos] = useState([]);
   const count = todos.length;
 
-  useEffect(async () => {
-    try {
-      const res = await axios.get("http://localhost:8080/todos", {
-        headers: {
-          Authorization: token,
-        },
-      });
-      setTodos(res.data.data);
-    } catch {}
-  }, []);
+  useEffect(() => {
+    async function fetchData() {
+      await axios
+        .get("http://localhost:8080/todos", {
+          headers: {
+            Authorization: token,
+          },
+        })
+        .then((res) => {
+          setTodos(res.data.data);
+        });
+    }
+    fetchData();
+  }, [todos]);
 
   return (
     <TemplateWrapper>
