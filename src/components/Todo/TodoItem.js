@@ -34,20 +34,15 @@ const TodoItem = ({ token, todo }) => {
       );
       alert("내용 변경이 완료되었습니다.");
       setFix(false);
-    } catch (err) {
-      console.log(err);
-    }
+    } catch {}
   };
 
   const handleDelete = async () => {
     try {
-      const res = await axios.delete(`http://localhost:8080/todos/${id}`, {
+      await axios.delete(`http://localhost:8080/todos/${id}`, {
         headers: { Authorization: token },
       });
-      console.log(res);
-    } catch (err) {
-      console.error(err);
-    }
+    } catch {}
   };
 
   const handleModal = () => {
