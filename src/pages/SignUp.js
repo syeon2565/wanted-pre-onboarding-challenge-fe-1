@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
@@ -46,54 +47,94 @@ const SignUp = () => {
       .then((res) => {
         alert(res.data.message);
         localStorage.setItem("token", res.data.token);
-        navigate("/");
+        navigate("/auth/login");
       })
       .catch((err) => {
-        alert(err.details);
+        alert(err);
+        console.log(err);
       });
     e.preventDefault();
   };
   return (
-    <>
+    <Wrapper>
+      <Title>회 원 가 입</Title>
       <form onSubmit={onSubmit}>
-        <label htmlFor="name">이름</label>
-        <input
+        <Input
           type="text"
           id="name"
           value={name}
           onChange={onChange}
           placeholder="이름을 입력해주세요."
         />
-        <label htmlFor="email">이메일</label>
-        <input
+        <Input
           type="text"
           id="email"
           value={email}
           onChange={onChange}
           placeholder="eamil을 입력해주세요."
         />
-        <label htmlFor="password">비밀번호 </label>
-        <input
+        <Input
           type="password"
           id="password"
           value={password}
           onChange={onChange}
           placeholder="password를 입력해주세요."
         />{" "}
-        <label htmlFor="password">비밀번호 확인 </label>
-        <input
+        <Input
           type="password"
           id="passwordConfirm"
           value={passwordConfirm}
           onChange={onChange}
           placeholder="password를 한번 더 입력해주세요."
         />
-        <button type="submit" disabled={btnDisabled}>
+        <Button type="submit" disabled={btnDisabled}>
           회원가입
-        </button>
+        </Button>
       </form>
-    </>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 638px;
+  height: 700px;
+  margin: 0 auto;
+  background: #7165ff;
+  border-radius: 15px;
+  text-align: center;
+`;
+
+const Title = styled.div`
+  padding: 50px 0 30px 0;
+  font-size: 50px;
+`;
+
+const Input = styled.input`
+  display: flex;
+  margin: 20px auto;
+  box-sizing: border-box;
+  width: 344px;
+  height: 60px;
+  background: #e1d7ff;
+  border: 2px solid #97aeff;
+  border-radius: 20px;
+  font-size: 20px;
+`;
+
+const Button = styled.button`
+  margin-top: 32px;
+  width: 190px;
+  height: 67px;
+  font-size: 30px;
+  color: black;
+  background: #c6abff;
+  border-radius: 20px;
+  cursor: pointer;
+  :disabled {
+    background: #d5ccea;
+  }
+`;
 
 export default SignUp;
