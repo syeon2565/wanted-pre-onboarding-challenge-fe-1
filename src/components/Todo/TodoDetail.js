@@ -50,13 +50,4 @@ const ModalWrapper = styled.div`
   min-height: 60%;
 `;
 
-const Button = styled.button`
-  background-color: #777;
-  width: 150px;
-  height: 60px;
-  font-size: 20px;
-  color: ff0000;
-  cursor: pointer;
-`;
-
 export default TodoDetail;
