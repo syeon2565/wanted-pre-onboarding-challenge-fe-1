@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import TodoInsert from "./TodoInsert";
-import TodoHeader from "./TodoHeader";
-import TodoList from "./TodoList";
+import TodoInsert from "../components/Todo/TodoInsert";
+import TodoHeader from "../components/Todo/TodoHeader";
+import TodoList from "../components/Todo/TodoList";
 import axios from "axios";
 import styled from "styled-components";
 
-const TodoTemplate = () => {
+const Todo = () => {
   const token = localStorage.getItem("token");
   const [todos, setTodos] = useState([]);
   const count = todos.length;
@@ -45,4 +45,4 @@ const TemplateWrapper = styled.div`
   border-radius: 20px;
 `;
 
-export default TodoTemplate;
+export default Todo;

@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import TodoTemplate from "./components/Todo/TodoTemplate";
+import Todo from "./pages/Todo";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Main from "./pages/Main";
@@ -20,7 +20,7 @@ function App() {
       <Routes>
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/signUp" element={<SignUp />} />
-        <Route path="/todo" element={<TodoTemplate />} />
+        <Route path="/todo" element={<Todo />} />
         <Route path="/" element={<Main />} />
       </Routes>
     </>
